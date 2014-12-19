@@ -32,10 +32,11 @@
 
                 // Throttle the calling of the handler for head movement events to once every 20ms
                 var throttled_update = _.throttle(this.handleHeadMovement, 20);
-                var pov = this.panorama.pov;
+                this.currentPov = this.panorama.pov;
 
+                var that = this;
                 $(document).on('headtrackingEvent', function(e){
-                    throttled_update(pov, e);
+                    throttled_update(that.currentPov, e);
                 });
 
                 this.registerSearchView(this.panorama, this);
@@ -43,6 +44,7 @@
                 this.panorama = new google.maps.StreetViewPanorama(this.el, this.panoramaOptions);
                 this.panorama.setVisible(true);
             }
+            this.registerPointerManager();
         },
 
         registerSearchView: function(panorama, mainView){
@@ -56,13 +58,20 @@
         },
 
         handleHeadMovement: function(currentPov, e){
-
-            // Get the amount the head moved left/right and up/down relative to the camera
-            var head_x = e.originalEvent.x;
-            var head_y = e.originalEvent.y / 2;
+            var head_x = 0,
+                head_y = 0;
+            
+            if(this.pointerStateActive){
+                return false;
+            }
+            else{
+                // Get the amount the head moved left/right and up/down relative to the camera
+                head_x = e.originalEvent.x;
+                head_y = e.originalEvent.y / 2;
+            }
 
             // Calculate a new heading and pitch
-            var new_heading = Math.max(0, Math.min(currentPov.heading - head_x, 360));
+            var new_heading = (currentPov.heading+360)%360 - head_x;
             var new_pitch = currentPov.pitch - head_y;
 
             var newPov = {
@@ -72,5 +81,19 @@
             };
 
             this.panorama.setPov(newPov);
-        }
+        },
+        
+        registerPointerManager: function() {
+            //@todo what about mouse outside the window ?
+            var that = this;
+            this.$el.on('mousedown',function(){
+                that.pointerStateActive = true;
+            });
+            this.$el.on('mouseup',function(){
+                that.pointerStateActive = false;
+                that.currentPov = that.panorama.getPov();
+            });
+        },
+        
+        pointerStateActive : false
     });
