@@ -29,4 +29,15 @@ var mainView = new Street_Facing_View({
 
 I might spend some time in the near future modularizing and generalizing this code, so people can drop it into any project if there is interest.
 
-** One thing to note when developing locally - Most browsers do not let you use [getUserMedia](http://dev.w3.org/2011/webrtc/editor/getusermedia.html) when serving HTML files directly off the filesystem. It is best to use a simple HTTP server in something like Python or Node to serve the files you're working with.
+### Contributors ###
+
+Run `npm install` , then `grunt` in your terminal, an http server will launch with livereload of the sources to ease your development ([getUserMedia](http://dev.w3.org/2011/webrtc/editor/getusermedia.html) doesn't do so well on `file://` protocol on most browsers)
+
+### Releases notes ###
+
+#### v0.1.0 @topheman
+* Added feature : ability to change pov with mouse without interfering with headtrackr
+* Added Gruntfile to ease dev with local server and livereload
+
+#### v0.0.0 @alexhancock
+* first release by Alex Hancock @alexhancock

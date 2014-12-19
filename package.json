@@ -1,8 +1,11 @@
 {
   "author": "Alex J. Hancock <alex@alexhancock.com> (github.com/alexhancock)",
+  "contributors":[
+      "Christophe Rosset <tophe@topheman.com> (github.com/topheman)"
+  ],
   "name": "street-facing",
   "description": "A google streetview app which changes point of view using facetracking",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "repository": {
     "url": ""
   },
