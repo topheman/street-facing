@@ -84,14 +84,16 @@
         },
         
         registerPointerManager: function() {
-            //@todo what about mouse outside the window ?
             var that = this;
             this.$el.on('mousedown',function(){
                 that.pointerStateActive = true;
             });
-            this.$el.on('mouseup',function(){
-                that.pointerStateActive = false;
-                that.currentPov = that.panorama.getPov();
+            //needs to be attached to document in case of mouseup triggers outside the original elem
+            $(document).on('mouseup',function(){
+                if(that.pointerStateActive){
+                    that.pointerStateActive = false;
+                    that.currentPov = that.panorama.getPov();
+                }
             });
         },
         
