@@ -1,0 +1,24 @@
+{
+  "author": "Alex J. Hancock <alex@alexhancock.com> (github.com/alexhancock)",
+  "contributors":[
+      "Christophe Rosset <tophe@topheman.com> (github.com/topheman)"
+  ],
+  "name": "street-facing",
+  "description": "A google streetview app which changes point of view using facetracking",
+  "version": "0.1.0",
+  "repository": {
+    "url": ""
+  },
+  "engines": {
+    "node": "~0.6.5"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "grunt": "^0.4.5",
+    "grunt-contrib-connect": "^0.9.0",
+    "grunt-contrib-watch": "^0.6.1",
+    "grunt-open": "^0.2.3",
+    "load-grunt-tasks": "^1.0.0",
+    "time-grunt": "^1.0.0"
+  }
+}
